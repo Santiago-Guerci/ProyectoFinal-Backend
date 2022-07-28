@@ -7,7 +7,7 @@ const postCart = async (req, res) => {
 const deleteCartById = async (req, res) => {
   let id = req.params.id;
   await CartDao.emptyCart(id);
-  res.json(await carritos.deleteCart(id));
+  res.json(await CartDao.deleteCart(id));
 };
 
 const getProductsOnCartById = async (req, res) => {
@@ -15,11 +15,12 @@ const getProductsOnCartById = async (req, res) => {
   res.json(await CartDao.getProductsById(id));
 };
 
+//Actualmente estoy agarrando un producto del body en vez de traerlo desde la base de datos de productos.
+//CORREGIR
 const postProductsOnCartById = async (req, res) => {
   let id = req.params.id;
-  let prodId = req.body.id;
-  let myProd = await ProductDao.getById(prodId);
-  res.json(CartDao.postProductOnCart(id, myProd));
+  let prodId = req.body;
+  res.json(CartDao.postProductOnCart(id, prodId));
 };
 
 const deleteProductOfCartById = (req, res) => {
@@ -28,7 +29,7 @@ const deleteProductOfCartById = (req, res) => {
   res.json(CartDao.deleteProductOfCart(id, prodId));
 };
 
-module.exports = {
+export {
   postCart,
   deleteCartById,
   getProductsOnCartById,

@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
+import productsRoutes from "./routes/productos.js";
+import cartsRoutes from "./routes/carritos.js";
 const app = express();
-const productsRoutes = require("./routes/productos");
-const cartsRoutes = require("./routes/carritos");
 const puerto = process.env.PORT || 8080;
 
 app.use(express.json());

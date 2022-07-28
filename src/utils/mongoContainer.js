@@ -40,7 +40,6 @@ class MongoContainer {
 
   async updateProduct(id, props) {
     try {
-      console.log(props);
       await this.collection.updateOne({ _id: id }, props);
       console.log(`Product with ${id} updated`);
     } catch (error) {
@@ -102,7 +101,6 @@ class MongoContainer {
   async getProductsById(id) {
     try {
       let cart = await this.getById(id);
-      console.log(cart.products);
       return cart.products;
     } catch (error) {
       console.log(`Error getting products from cart ${id}. Error: ${error}`);
@@ -111,13 +109,13 @@ class MongoContainer {
 
   //De los productos que ya tengo, cada prod tiene un id. Lo agarro, y lo meto en el cart solicitado (lo agarro por req.body)
   async postProductOnCart(id, myProd) {
-    console.log(myProd);
     try {
       let cart = await this.getById(id);
       cart.products.push(myProd);
+      console.log(cart);
       let cartModel = new this.collection(cart);
       await cartModel.save();
-      console.log(`The product ${myProd.id} has been added to cart ${id}`);
+      console.log(`The product ${myProd.name} has been added to cart ${id}`);
     } catch (error) {
       console.log(`Error pushing product in cart. Error: ${error}`);
     }
@@ -140,4 +138,4 @@ class MongoContainer {
   //FIN METODOS DE CARRITOS
 }
 
-module.exports = MongoContainer;
+export default MongoContainer;

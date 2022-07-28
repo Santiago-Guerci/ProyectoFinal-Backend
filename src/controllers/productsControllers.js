@@ -23,8 +23,8 @@ const postProduct = (req, res) => {
     let newProduct = { name, description, code, thumbnail, price, stock };
     ProductDao.save(newProduct);
     res.redirect("/");
-  } catch {
-    res.json({ error: "Error en petición POST" });
+  } catch (error) {
+    res.json({ error: "Error en petición POST. Error: " + error });
   }
 };
 
@@ -39,19 +39,13 @@ const putProduct = async (req, res) => {
   }
 };
 
-const deleteProduct = (req, res) => {
+const deleteProduct = async (req, res) => {
   let id = req.params.id;
   try {
-    res.json(ProductDao.deleteById(id));
+    res.json(await ProductDao.deleteById(id));
   } catch {
     res.json({ error: "Producto no encontrado" });
   }
 };
 
-module.exports = {
-  productos,
-  getProductOrAll,
-  postProduct,
-  putProduct,
-  deleteProduct,
-};
+export { getProductOrAll, postProduct, putProduct, deleteProduct };
