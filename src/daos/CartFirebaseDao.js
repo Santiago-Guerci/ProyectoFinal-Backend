@@ -1,4 +1,4 @@
-import FirebaseContainer from "../utils/firebaseContainer";
+import FirebaseContainer from "../utils/firebaseContainer.js";
 
 class CartFirebaseDao extends FirebaseContainer {
   constructor() {
