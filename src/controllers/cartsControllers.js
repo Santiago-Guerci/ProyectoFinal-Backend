@@ -1,4 +1,4 @@
-import { CartDao, ProductDao } from "../daos/index.js";
+import { CartDao } from "../daos/index.js";
 
 const postCart = async (req, res) => {
   res.json(await CartDao.createCart());
