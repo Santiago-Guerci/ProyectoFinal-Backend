@@ -1,26 +1,12 @@
-import express from "express";
-const { Router } = express;
-let router = new Router();
+import { Router } from "express";
 import {
   getProductOrAll,
   postProduct,
   putProduct,
   deleteProduct,
 } from "../controllers/productsControllers.js";
-// const admin = true;
 
-// const verifyLogin = (admin) => {
-//   return (req, res, next) => {
-//     if (admin === true) {
-//       next;
-//     } else {
-//       res.json({
-//         Error: -1,
-//         descripcion: `Ruta ${req.route.path}, Metodo ${req.route.stack[0].method} - No autorizada}`,
-//       });
-//     }
-//   };
-// };
+const router = Router();
 
 // Rutas
 router.get("/:id?", getProductOrAll);

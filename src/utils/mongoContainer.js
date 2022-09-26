@@ -1,7 +1,9 @@
 import config from "../config.js";
 import mongoose from "mongoose";
 
-await mongoose.connect(config.mongodb.connectionString);
+await mongoose
+  .connect(config.mongodb.connectionString)
+  .then(console.log("Connected to Mongo DB"));
 
 class MongoContainer {
   constructor(collectionName, schema) {

@@ -1,6 +1,7 @@
 export default {
   mongodb: {
-    connectionString: "mongodb://localhost:27017/ecommerce",
+    connectionString:
+      "mongodb+srv://Santi:Independiente38@cluster0.zdc3m9o.mongodb.net/PrFinal?retryWrites=true&w=majority",
   },
   firebase: {
     type: "service_account",
