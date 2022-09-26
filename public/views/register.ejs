@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="icon" href="data:," />
-    <title>Clase 32 - Loggers</title>
+    <title>Proyecto Final - Sign Up</title>
   </head>
   <body style="background-color: rgb(178, 247, 224)">
     <header>
@@ -25,20 +25,49 @@
               height="24"
               class="d-inline-block align-text-top"
             />
-            Clase 32 - Loggers
+            Proyecto Final
           </a>
         </div>
       </nav>
     </header>
 
     <div class="container mt-3 pb-3 bg-light">
-      <h1>Página principal</h1>
-      <div id="userWelcome">
-        <h2 class="mt-4">
-          Welcome <%= username %>
-          <button class="btn btn-danger" onclick="volver()">Logout</button>
-        </h2>
-      </div>
+      <h1>Sign Up</h1>
+
+      <form action="/register" method="post" enctype="multipart/form-data">
+        <h2 class="text-primary">Regístrese</h2>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="sucorreo@correo.com"
+        />
+        <input type="password" id="password" name="password" />
+        <input type="text" id="name" name="name" placeholder="Su nombre" />
+        <input
+          type="text"
+          id="address"
+          name="address"
+          placeholder="Dirección"
+        />
+        <input type="number" id="age" name="age" placeholder="Su edad" />
+        <input
+          type="number"
+          id="phone"
+          name="phone"
+          placeholder="+541130373577"
+        />
+        <input type="file" id="profilePic" name="profilePic" />
+        <input
+          type="submit"
+          name="submitSignup"
+          id="submitSignup"
+          class="btn btn-success"
+          value="Sign Up"
+        />
+      </form>
+      <button class="btn btn-primary" onclick="volver()">Log In</button>
+      <button class="btn btn-primary" onclick="info()">Info</button>
     </div>
 
     <script>
@@ -46,8 +75,10 @@
         location.href = pagina;
       }
       function volver() {
-        console.log("volver");
-        redirect("/logout");
+        redirect("/login");
+      }
+      function info() {
+        redirect("/infocomp");
       }
     </script>
     <script

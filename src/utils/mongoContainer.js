@@ -1,4 +1,4 @@
-import config from "../config.js";
+import config from "../dbConfig.js";
 import mongoose from "mongoose";
 
 await mongoose

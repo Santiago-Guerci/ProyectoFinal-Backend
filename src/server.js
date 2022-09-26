@@ -12,12 +12,15 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcrypt";
 import compression from "compression";
+import MongoStore from "connect-mongo";
+import config from "./cliConfig.js";
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = config.port;
+const mode = config.mode;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-app.set("views", path.join(__dirname, "../public"));
+app.set("views", path.join(__dirname, "../public/views"));
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -63,6 +66,7 @@ const registerStrategy = new LocalStrategy(
       if (existingUser) {
         return done(null, null);
       }
+      console.log(req.body.profilePic);
 
       const newUser = {
         email,
@@ -71,7 +75,7 @@ const registerStrategy = new LocalStrategy(
         address: req.body.address,
         age: req.body.age,
         phone: req.body.phone,
-        imageUrl: req.body.imageUrl,
+        imageUrl: req.body.profilePic,
       };
       const createdUser = await User.create(newUser);
 

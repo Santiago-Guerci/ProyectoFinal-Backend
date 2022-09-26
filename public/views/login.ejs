@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="icon" href="data:," />
-    <title>Clase 32 - Sign Up</title>
+    <title>Proyecto Final - Login</title>
   </head>
   <body style="background-color: rgb(178, 247, 224)">
     <header>
@@ -25,30 +25,29 @@
               height="24"
               class="d-inline-block align-text-top"
             />
-            Clase 32 - Loggers
+            Proyecto Final
           </a>
         </div>
       </nav>
     </header>
 
     <div class="container mt-3 pb-3 bg-light">
-      <h1>Sign Up</h1>
+      <h1>Login de usuario</h1>
 
-      <form action="/register" method="post">
-        <h2 class="text-primary">Regístrese con usuario, email y contraseña</h2>
-        <input type="text" id="username" name="username" placeholder="santi" />
+      <form action="/login" method="post">
+        <h2 class="text-primary">Ingrese su email y contraseña</h2>
         <input type="email" id="email" name="email" placeholder="santi@mail" />
         <input type="password" id="password" name="password" />
         <input
           type="submit"
-          name="submitSignup"
-          id="submitSignup"
+          name="submitLogin"
+          id="submitLogin"
           class="btn btn-success"
-          value="Sign Up"
+          value="Login"
         />
       </form>
-      <button class="btn btn-primary" onclick="volver()">Log In</button>
-      <button class="btn btn-primary" onclick="info()">Info</button>
+
+      <button class="btn btn-primary" onclick="volver()">Sign Up</button>
     </div>
 
     <script>
@@ -56,10 +55,7 @@
         location.href = pagina;
       }
       function volver() {
-        redirect("/login");
-      }
-      function info() {
-        redirect("/infocomp");
+        redirect("/register");
       }
     </script>
     <script

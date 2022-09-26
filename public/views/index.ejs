@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="icon" href="data:," />
-    <title>Clase 32 - Login</title>
+    <title>Proyecto Final</title>
   </head>
   <body style="background-color: rgb(178, 247, 224)">
     <header>
@@ -25,30 +25,21 @@
               height="24"
               class="d-inline-block align-text-top"
             />
-            Clase 32 - Loggers
+            Proyecto Final
           </a>
         </div>
       </nav>
     </header>
 
     <div class="container mt-3 pb-3 bg-light">
-      <h1>Login de usuario</h1>
-
-      <form action="/login" method="post">
-        <h2 class="text-primary">Ingrese su email y contraseña</h2>
-        <input type="text" id="username" name="username" placeholder="santi" />
-        <input type="email" id="email" name="email" placeholder="santi@mail" />
-        <input type="password" id="password" name="password" />
-        <input
-          type="submit"
-          name="submitLogin"
-          id="submitLogin"
-          class="btn btn-success"
-          value="Login"
-        />
-      </form>
-
-      <button class="btn btn-primary" onclick="volver()">Sign Up</button>
+      <h1>Página principal</h1>
+      <div id="userWelcome">
+        <h2 class="mt-4">
+          Welcome <%= name %>
+          <button class="btn btn-danger" onclick="volver()">Logout</button>
+        </h2>
+        <img src="<%= file %>" alt="profilePic" />
+      </div>
     </div>
 
     <script>
@@ -56,7 +47,8 @@
         location.href = pagina;
       }
       function volver() {
-        redirect("/register");
+        console.log("volver");
+        redirect("/logout");
       }
     </script>
     <script

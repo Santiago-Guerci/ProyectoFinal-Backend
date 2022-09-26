@@ -1,8 +1,8 @@
 import os from "os";
 
 const mainRoute = (req, res) => {
-  let user = req.session.username;
-  let username = user.username;
+  let user = req.session.email;
+  let username = user.name;
   console.log(`el user en mainRoute es: ${user}`);
   res.render("index.ejs", { username });
 };
@@ -35,10 +35,16 @@ const getSignup = (req, res) => {
   res.render("register.ejs");
 };
 
-const postSignup = (req, res) => {
-  req.session.user = req.body.username;
-  let username = req.user.username;
-  res.render("index.ejs", { username });
+const postSignup = (req, res, next) => {
+  //MODIFICAR CON LOS DATOS ACTUALES DEL USUARIO. FOTO, NOMBRE, ETC ETC
+  let file = req.file;
+  req.session.user = req.body.email;
+  let name = req.user.name;
+  if (!file) {
+    alert("Please upload a file");
+    return next;
+  }
+  res.render("index.ejs", { name, file });
 };
 
 const signupFail = (req, res) => {
