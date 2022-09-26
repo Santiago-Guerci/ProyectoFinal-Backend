@@ -1,8 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 export default {
-  mongodb: {
-    connectionString:
-      "mongodb+srv://Santi:Independiente38@cluster0.zdc3m9o.mongodb.net/PrFinal?retryWrites=true&w=majority",
-  },
+  mongodb: { connectionString: process.env.MONGODB },
   firebase: {
     type: "service_account",
     project_id: "backend-coderhouse-d3aa8",
