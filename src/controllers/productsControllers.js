@@ -1,16 +1,20 @@
 import { ProductDao } from "../daos/index.js";
 
+//Modificado para que en vez de enviar un json, rendericen el ejs con los productos y así mostrarlos
 const getProductOrAll = async (req, res) => {
   let id = req.params.id;
   if (id) {
     try {
-      res.json(await ProductDao.getById(id));
+      let product = await ProductDao.getById(id);
+      res.render("singleProduct.ejs", { product });
     } catch {
       res.json({ error: "Producto no encontrado" });
     }
   } else {
     try {
-      res.json(await ProductDao.getAll());
+      let products = await ProductDao.getAll();
+      console.log(products);
+      res.render("index.ejs", { products });
     } catch {
       res.json({ error: "Id no encontrado" });
     }

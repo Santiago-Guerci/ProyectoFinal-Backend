@@ -47,12 +47,8 @@
       </nav>
     </header>
 
-    <div
-      class="container mt-3 mb-3 pt-3 pb-3 bg-light d-flex"
-      id="allProdsContainer"
-    >
-      <% products.forEach((product) => { %>
-      <div class="card" style="width: 18rem; margin: 1rem">
+    <div class="container mt-3 mb-3 pt-3 pb-3 bg-light">
+      <div class="card" style="width: 18rem">
         <img
           src="<%= product.thumbnail %>"
           class="card-img-top"
@@ -67,7 +63,6 @@
           <p class="btn btn-primary">$<%= product.price %></p>
         </div>
       </div>
-      <% }) %>
     </div>
 
     <script>
