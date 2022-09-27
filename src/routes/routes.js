@@ -32,7 +32,7 @@ router.post(
   postSignup
 );
 router.get("/failsignup", signupFail);
-router.get("/logout", authCheck, getLogout);
+router.get("/logout", getLogout);
 router.get("/info", getInfo);
 
 export default router;

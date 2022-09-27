@@ -22,6 +22,7 @@ const port = config.port;
 const mode = config.mode;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+app.use("/public", express.static(path.join(__dirname, "../public")));
 app.set("views", path.join(__dirname, "../public/views"));
 app.set("view engine", "ejs");
 app.use(express.json());

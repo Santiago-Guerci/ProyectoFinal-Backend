@@ -1,18 +1,17 @@
 import os from "os";
 
 const mainRoute = (req, res) => {
-  let user = req.session.email;
-  let username = user.name;
+  let user = req.user.email;
   console.log(`el user en mainRoute es: ${user}`);
-  res.render("index.ejs", { username });
+  res.render("index.ejs", { user });
 };
 
 const getLogin = (req, res) => {
   if (req.isAuthenticated()) {
     console.log("user logged");
-    let username = req.user.username;
-    console.log(username);
-    return res.render("index.ejs", { username }); //modificar plantilla index para q muestre el mail
+    let name = req.user.name;
+    console.log(name);
+    return res.render("index.ejs", { name }); //modificar plantilla index para q muestre el mail
   } else {
     console.log("Endpoint getLogin. user not logged");
     res.render("login.ejs");
@@ -20,9 +19,11 @@ const getLogin = (req, res) => {
 };
 
 const postLogin = (req, res) => {
-  req.session.user = req.body.username;
-  let username = req.user.username;
-  res.render("index.ejs", { username });
+  console.log("Se ejecutó post login");
+  let name = req.user.name;
+  let imageUrl = req.user.imageUrl;
+  console.log(req.user.imageUrl);
+  res.render("index.ejs", { name, imageUrl });
 };
 
 const loginFail = (req, res) => {
@@ -38,12 +39,12 @@ const getSignup = (req, res) => {
 const postSignup = async (req, res) => {
   console.log("Se ejecutó post signup");
   const image = req.file;
-  console.log(image);
   if (!image) {
     return res.json({ Error: "Please upload a profile picture" });
   }
   let name = req.body.name;
-  res.render("index.ejs", { name, image });
+  let imageUrl = req.user.imageUrl;
+  res.render("index.ejs", { name, imageUrl });
 };
 
 const signupFail = (req, res) => {
@@ -52,11 +53,16 @@ const signupFail = (req, res) => {
 };
 
 const getLogout = (req, res) => {
-  console.log(`Entre a logout y el username es ${username}`);
-  let username = req.user.username;
+  let name = req.user.name;
+  console.log(`Entre a logout y el nombre es ${name}`);
   req.logout();
+  req.session.destroy((error) => {
+    error
+      ? res.json({ status: "logout error", error: error })
+      : res.json({ status: "ok" });
+  });
   console.log(`Hice el req.logout()`);
-  res.render("logout.ejs", { username });
+  res.render("logout.ejs", { name });
 };
 
 const getInfo = (req, res) => {

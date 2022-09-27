@@ -38,7 +38,7 @@
           Welcome <%= name %>
           <button class="btn btn-danger" onclick="volver()">Logout</button>
         </h2>
-        <img src="<%= file %>" alt="profilePic" />
+        <img src="<%= imageUrl %>" alt="profilePic" />
       </div>
     </div>
 
@@ -47,7 +47,6 @@
         location.href = pagina;
       }
       function volver() {
-        console.log("volver");
         redirect("/logout");
       }
     </script>
