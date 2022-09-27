@@ -12,20 +12,7 @@ import {
 } from "../controllers/apiController.js";
 import { authCheck } from "../middlewares/loginMW.js";
 import passport from "passport";
-import multer from "multer";
-
-//VER SI PUEDO MOVER EL STORAGE DE MULTER A OTRO ARCHIVO
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "../public/uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({ storage });
-//FIN MULTER
+import upload from "../multer.js";
 
 const router = Router();
 
@@ -40,8 +27,8 @@ router.get("/faillogin", loginFail);
 router.get("/register", getSignup);
 router.post(
   "/register",
-  passport.authenticate("register", { failureRedirect: "/failsignup" }),
   upload.single("profilePic"),
+  passport.authenticate("register", { failureRedirect: "/failsignup" }),
   postSignup
 );
 router.get("/failsignup", signupFail);

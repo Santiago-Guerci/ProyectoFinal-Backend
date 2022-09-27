@@ -35,16 +35,15 @@ const getSignup = (req, res) => {
   res.render("register.ejs");
 };
 
-const postSignup = (req, res, next) => {
-  //MODIFICAR CON LOS DATOS ACTUALES DEL USUARIO. FOTO, NOMBRE, ETC ETC
-  let file = req.file;
-  req.session.user = req.body.email;
-  let name = req.user.name;
-  if (!file) {
-    alert("Please upload a file");
-    return next;
+const postSignup = async (req, res) => {
+  console.log("Se ejecutó post signup");
+  const image = req.file;
+  console.log(image);
+  if (!image) {
+    return res.json({ Error: "Please upload a profile picture" });
   }
-  res.render("index.ejs", { name, file });
+  let name = req.body.name;
+  res.render("index.ejs", { name, image });
 };
 
 const signupFail = (req, res) => {

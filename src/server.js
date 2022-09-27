@@ -14,6 +14,8 @@ import bcrypt from "bcrypt";
 import compression from "compression";
 import MongoStore from "connect-mongo";
 import config from "./cliConfig.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const port = config.port;
@@ -59,49 +61,62 @@ function verifyPw(realPw, encriptedPw) {
 
 // GENERO LA REGISTER STRATEGY
 const registerStrategy = new LocalStrategy(
-  { passReqToCallback: true },
-  async (req, email, password, done) => {
+  { passReqToCallback: true, usernameField: "email" },
+  async (req, username, password, done) => {
+    let { email, name, address, age, phone } = req.body;
     try {
       const existingUser = await User.findOne({ email });
       if (existingUser) {
         return done(null, null);
       }
-      console.log(req.body.profilePic);
 
       const newUser = {
         email,
         password: encriptPw(password),
-        name: req.body.name,
-        address: req.body.address,
-        age: req.body.age,
-        phone: req.body.phone,
-        imageUrl: req.body.profilePic,
+        name,
+        address,
+        age,
+        phone,
+        imageUrl: `${req.protocol}://${req.get(
+          "host"
+        )}/public/uploads/avatar-${email}.jpg`,
       };
       const createdUser = await User.create(newUser);
-
+      req.session.user = {
+        name: newUser.name,
+        email: newUser.email,
+        address: newUser.address,
+        age: newUser.age,
+        imageUrl: newUser.imageUrl,
+        phone: newUser.phone,
+      };
       done(null, createdUser);
     } catch (error) {
       console.log(`Sign Up error. Info: ${error}`);
-      done("Error en el registro", null); //En vez del error, debería poner "null" y hacer un failRedirect('/failsignup')
+      done("Error en el registro", null);
     }
   }
 );
 // FIN REGISTER STRATEGY
 
 // GENERO LA LOGIN STRATEGY
-const loginStrategy = new LocalStrategy(async (email, password, done) => {
-  try {
-    const user = await User.findOne({ email });
-    if (!user || !verifyPw(password, user.password)) {
-      return done(null, null);
-    }
+const loginStrategy = new LocalStrategy(
+  { passReqToCallback: true, usernameField: "email" },
+  async (req, username, password, done) => {
+    let { email } = req.body;
+    try {
+      const user = await User.findOne({ email });
+      if (!user || !verifyPw(password, user.password)) {
+        return done(null, null);
+      }
 
-    done(null, user);
-  } catch (error) {
-    console.log(`Log In error. Info: ${error}`);
-    done("Error en el login", null); //En vez del error, debería poner "null" y hacer un failRedirect('/faillogin')
+      done(null, user);
+    } catch (error) {
+      console.log(`Log In error. Info: ${error}`);
+      done("Error en el login", null);
+    }
   }
-});
+);
 // FIN LOGIN STRATEGY
 
 passport.use("register", registerStrategy);
@@ -115,7 +130,7 @@ passport.deserializeUser((id, done) => {
   User.findById(id, done);
 });
 
-app.use("*", compression());
+app.use(compression());
 
 if (mode == "cluster" && cluster.isPrimary) {
   os.cpus().map(() => {
