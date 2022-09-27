@@ -1,4 +1,4 @@
-import { CartDao } from "../daos/index.js";
+import { CartDao, ProductDao } from "../daos/index.js";
 
 const postCart = async (req, res) => {
   res.json(await CartDao.createCart());
@@ -16,10 +16,10 @@ const getProductsOnCartById = async (req, res) => {
 };
 
 //Actualmente estoy agarrando un producto del body en vez de traerlo desde la base de datos de productos.
-//CORREGIR
+//CORREGIDO, PUSE EL PRODUCTDAO.GETBYID PARA TRAERLO DE LA BASE DE DATOS
 const postProductsOnCartById = async (req, res) => {
   let id = req.params.id;
-  let prodId = req.body;
+  let prodId = ProductDao.getById(id);
   res.json(CartDao.postProductOnCart(id, prodId));
 };
 

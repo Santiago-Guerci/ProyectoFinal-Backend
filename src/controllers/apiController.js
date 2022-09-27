@@ -11,7 +11,7 @@ const getLogin = (req, res) => {
     console.log("user logged");
     let name = req.user.name;
     console.log(name);
-    return res.render("index.ejs", { name }); //modificar plantilla index para q muestre el mail
+    return res.render("index.ejs", { name });
   } else {
     console.log("Endpoint getLogin. user not logged");
     res.render("login.ejs");
@@ -55,14 +55,11 @@ const signupFail = (req, res) => {
 const getLogout = (req, res) => {
   let name = req.user.name;
   console.log(`Entre a logout y el nombre es ${name}`);
-  req.logout();
-  req.session.destroy((error) => {
+  req.logout((error) => {
     error
-      ? res.json({ status: "logout error", error: error })
-      : res.json({ status: "ok" });
+      ? res.json("error en el req.logout")
+      : res.render("logout.ejs", { name });
   });
-  console.log(`Hice el req.logout()`);
-  res.render("logout.ejs", { name });
 };
 
 const getInfo = (req, res) => {

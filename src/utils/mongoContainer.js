@@ -28,6 +28,7 @@ class MongoContainer {
       return doc;
     } catch (error) {
       console.log("Error reading getById. Error: " + error);
+      next();
     }
   }
 

@@ -48,7 +48,16 @@
     </header>
 
     <div class="container mt-3 pb-3 bg-light">
-      <h1>Productos</h1>
+      <h1>Página principal</h1>
+      <div id="userWelcome">
+        <h2 class="mt-4">Welcome <%= name %></h2>
+        <img
+          style="width: 200px"
+          src="<%= imageUrl %>"
+          alt="profilePic"
+          class="img-thumbnail rounded"
+        />
+      </div>
       <div id="allProductsContainer"></div>
     </div>
 
