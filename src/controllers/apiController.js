@@ -1,17 +1,17 @@
 import os from "os";
 
 const mainRoute = (req, res) => {
-  let user = req.user.email;
-  console.log(`el user en mainRoute es: ${user}`);
-  res.render("index.ejs", { user });
+  let name = req.user.name;
+  let imageUrl = req.user.imageUrl;
+  return res.render("profile.ejs", { name, imageUrl });
 };
 
 const getLogin = (req, res) => {
   if (req.isAuthenticated()) {
     console.log("user logged");
     let name = req.user.name;
-    console.log(name);
-    return res.render("index.ejs", { name });
+    let imageUrl = req.user.imageUrl;
+    return res.render("profile.ejs", { name, imageUrl });
   } else {
     console.log("Endpoint getLogin. user not logged");
     res.render("login.ejs");
@@ -23,7 +23,7 @@ const postLogin = (req, res) => {
   let name = req.user.name;
   let imageUrl = req.user.imageUrl;
   console.log(req.user.imageUrl);
-  res.render("index.ejs", { name, imageUrl });
+  res.render("profile.ejs", { name, imageUrl });
 };
 
 const loginFail = (req, res) => {

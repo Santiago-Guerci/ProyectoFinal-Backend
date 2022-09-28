@@ -1,0 +1,30 @@
+<header>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/164/164659.png"
+            alt=""
+            width="30"
+            height="24"
+            class="d-inline-block align-text-top" />
+          Proyecto Final
+        </a>
+        <ul style="flex-direction: row" class="navbar-nav">
+          <li style="margin: 0 1rem" class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/api/productos"> Productos</a>
+          </li>
+          <li style="margin: 0 1rem" class="nav-item">
+            <a class="nav-link" href="/">Mi perfil</a>
+          </li>
+          <li style="margin: 0 1rem" class="nav-item">
+            <!-- Aca me está llevando a un solo carrito en específico hasta que le pueda aclarar que vaya al carrito asignado al usuario -->
+            <a class="nav-link" href="/api/carrito/633472ed2334a2f7915653b1/productos">Carrito</a>
+          </li>
+          <li>
+            <button class="btn btn-danger" onclick="volver()">Logout</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+</header>

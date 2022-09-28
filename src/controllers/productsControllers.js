@@ -13,7 +13,6 @@ const getProductOrAll = async (req, res) => {
   } else {
     try {
       let products = await ProductDao.getAll();
-      console.log(products);
       res.render("index.ejs", { products });
     } catch {
       res.json({ error: "Id no encontrado" });

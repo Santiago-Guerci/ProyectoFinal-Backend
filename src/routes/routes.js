@@ -16,7 +16,7 @@ import upload from "../multer.js";
 
 const router = Router();
 
-router.get("/", authCheck, mainRoute);
+router.get("/", authCheck, mainRoute); //Ahora me lleva al perfil, tengo que crear una pag de home.
 router.get("/login", getLogin);
 router.post(
   "/login",
