@@ -44,7 +44,7 @@ const postSignup = async (req, res) => {
   }
   let name = req.body.name;
   let imageUrl = req.user.imageUrl;
-  res.render("index.ejs", { name, imageUrl });
+  res.render("profile.ejs", { name, imageUrl });
 };
 
 const signupFail = (req, res) => {

@@ -13,7 +13,8 @@ import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcrypt";
 import compression from "compression";
 import MongoStore from "connect-mongo";
-import config from "./cliConfig.js";
+import config from "./config/cliConfig.js";
+import sendMail from "./nodemailerConfig.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -91,6 +92,20 @@ const registerStrategy = new LocalStrategy(
         imageUrl: newUser.imageUrl,
         phone: newUser.phone,
       };
+
+      const html = `
+                <h1>NEW REGISTERED USER</h1>
+                <div>
+                    <h2>USER DATA</h2>
+                    <p>e-mail: ${email}</p>
+                    <p>name: ${name}</p>
+                    <p>address: ${address}</p>
+                    <p>age: ${age}</p>
+                    <p>phone: ${phone}</p>
+                </div>
+            `;
+
+      sendMail(process.env.ADMIN_MAIL, "New user", html);
       done(null, createdUser);
     } catch (error) {
       console.log(`Sign Up error. Info: ${error}`);
