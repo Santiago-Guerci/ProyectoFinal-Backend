@@ -15,7 +15,7 @@ const getProductOrAll = async (req, res) => {
   } else {
     try {
       let products = await ProductDao.getAll();
-      res.render("index.ejs", { products });
+      res.render("products.ejs", { products });
     } catch (error) {
       logger.error("ID no encontrado. Error: " + error);
       res.json({ error: "Id no encontrado" });

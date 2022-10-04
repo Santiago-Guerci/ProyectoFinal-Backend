@@ -4,6 +4,7 @@ import rutas from "./routes/routes.js";
 import productsRoutes from "./routes/productos.js";
 import cartsRoutes from "./routes/carritos.js";
 import { User } from "../models/userModel.js";
+import { CartDao } from "./daos/index.js";
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -77,6 +78,8 @@ const registerStrategy = new LocalStrategy(
         return done(null, null);
       }
 
+      let newCart = CartDao.createCart();
+
       const newUser = {
         email,
         password: encriptPw(password),
@@ -87,7 +90,10 @@ const registerStrategy = new LocalStrategy(
         imageUrl: `${req.protocol}://${req.get(
           "host"
         )}/public/uploads/avatar-${email}.jpg`,
+        role: "user",
+        cartId: newCart,
       };
+
       const createdUser = await User.create(newUser);
       req.session.user = {
         name: newUser.name,
@@ -96,6 +102,8 @@ const registerStrategy = new LocalStrategy(
         age: newUser.age,
         imageUrl: newUser.imageUrl,
         phone: newUser.phone,
+        role: newUser.role,
+        cartId: newUser.cartId,
       };
 
       const html = `
