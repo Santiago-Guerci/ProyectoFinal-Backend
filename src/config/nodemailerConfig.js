@@ -1,5 +1,6 @@
 import { createTransport } from "nodemailer";
 import dontenv from "dotenv";
+import logger from "../logs/loggers.js";
 dontenv.config();
 
 const ADMIN_MAIL = process.env.ADMIN_MAIL;
@@ -24,7 +25,7 @@ const sendMail = async (to, subject, message) => {
   try {
     await transporter.sendMail(mailOptions);
   } catch (error) {
-    console.log("error sending mail: ", error);
+    logger.error("error sending mail: ", error);
   }
 };
 

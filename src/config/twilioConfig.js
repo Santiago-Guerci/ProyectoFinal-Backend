@@ -1,5 +1,6 @@
 import twilio from "twilio";
 import dotenv from "dotenv";
+import logger from "../logs/loggers.js";
 dotenv.config();
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -19,7 +20,7 @@ const sendSms = async (to, body) => {
   try {
     await client.messages.create(options);
   } catch (error) {
-    console.log("Error sending sms: ", error); //cambiar por logger
+    logger.error("Error sending sms: ", error);
   }
 };
 
@@ -33,7 +34,7 @@ const sendWpp = async (to, body) => {
   try {
     await client.messages.create(options);
   } catch (error) {
-    console.log("Error sending whatsapp: ", error); //cambiar por logger
+    logger.error("Error sending whatsapp: ", error);
   }
 };
 

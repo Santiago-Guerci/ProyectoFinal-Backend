@@ -1,5 +1,6 @@
 import config from "../dbConfig.js";
 import mongoose from "mongoose";
+import logger from "../logs/loggers.js";
 
 await mongoose
   .connect(config.mongodb.connectionString)
@@ -18,7 +19,9 @@ class MongoContainer {
       const newObj = await objectModel.save();
       console.log(`Object saved with id ${newObj._id}`);
     } catch (error) {
-      console.log("There has been an error saving the object. Error: " + error);
+      logger.error(
+        "There has been an error saving the object. Error: " + error
+      );
     }
   }
 
@@ -27,7 +30,7 @@ class MongoContainer {
       const doc = await this.collection.findOne({ _id: id }, { __v: 0 });
       return doc;
     } catch (error) {
-      console.log("Error reading getById. Error: " + error);
+      logger.error("Error reading getById. Error: " + error);
       next();
     }
   }
@@ -37,7 +40,7 @@ class MongoContainer {
       const docs = await this.collection.find({}, { __v: 0 });
       return docs;
     } catch (error) {
-      console.log(`Error reading getAll. Error: ${error}`);
+      logger.error(`Error reading getAll. Error: ${error}`);
     }
   }
 
@@ -46,7 +49,7 @@ class MongoContainer {
       await this.collection.updateOne({ _id: id }, props);
       console.log(`Product with ${id} updated`);
     } catch (error) {
-      console.log(`Error updating product ${id}`);
+      logger.error(`Error updating product ${id}`);
     }
   }
 
@@ -55,7 +58,7 @@ class MongoContainer {
       await this.collection.deleteOne({ _id: id });
       console.log(`Product with id: ${id} deleted`);
     } catch (error) {
-      console.log(`Error deleting item ${id}. Error: ${error}`);
+      logger.error(`Error deleting item ${id}. Error: ${error}`);
     }
   }
 
@@ -64,7 +67,7 @@ class MongoContainer {
       await this.collection.deleteMany({});
       console.log(`Collection emptied`);
     } catch (error) {
-      console.log(`Error deleting all items. Error: ${error}`);
+      logger.error(`Error deleting all items. Error: ${error}`);
     }
   }
   //FIN METODOS DE PRODUCTOS
@@ -79,7 +82,9 @@ class MongoContainer {
       console.log(`Cart id: ${newCart._id} has been created`);
       return newCart._id;
     } catch (error) {
-      console.log("There has been an error creating the cart. Error: " + error);
+      logger.error(
+        "There has been an error creating the cart. Error: " + error
+      );
     }
   }
 
@@ -88,7 +93,7 @@ class MongoContainer {
       await this.collection.updateOne({ _id: id }, { $set: { products: [] } });
       console.log(`The cart ${id} has been emptied`);
     } catch (error) {
-      console.log(`Error emtpying cart ${id}. Error: ${error}`);
+      logger.error(`Error emtpying cart ${id}. Error: ${error}`);
     }
   }
 
@@ -97,7 +102,7 @@ class MongoContainer {
       await this.collection.deleteOne({ _id: id });
       console.log(`The cart ${id} has been deleted`);
     } catch (error) {
-      console.log(`Error deleting cart ${id}. Error: ${error}`);
+      logger.error(`Error deleting cart ${id}. Error: ${error}`);
     }
   }
 
@@ -106,7 +111,7 @@ class MongoContainer {
       let cart = await this.getById(id);
       return cart.products;
     } catch (error) {
-      console.log(`Error getting products from cart ${id}. Error: ${error}`);
+      logger.error(`Error getting products from cart ${id}. Error: ${error}`);
     }
   }
 
@@ -120,7 +125,7 @@ class MongoContainer {
       await cartModel.save();
       console.log(`The product ${myProd.name} has been added to cart ${id}`);
     } catch (error) {
-      console.log(`Error pushing product in cart. Error: ${error}`);
+      logger.error(`Error pushing product in cart. Error: ${error}`);
     }
   }
 
@@ -135,7 +140,7 @@ class MongoContainer {
       await cartModel.save();
       console.log(`The product ${prodId} has been deleted from cart ${id}`);
     } catch (error) {
-      console.log(`Error deleting product from cart. Error: ${error}`);
+      logger.error(`Error deleting product from cart. Error: ${error}`);
     }
   }
   //FIN METODOS DE CARRITOS

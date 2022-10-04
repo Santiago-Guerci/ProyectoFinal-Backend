@@ -1,4 +1,5 @@
 import { ProductDao } from "../daos/index.js";
+import logger from "../logs/loggers.js";
 
 //Modificado para que en vez de enviar un json, rendericen el ejs con los productos y así mostrarlos
 const getProductOrAll = async (req, res) => {
@@ -7,14 +8,16 @@ const getProductOrAll = async (req, res) => {
     try {
       let product = await ProductDao.getById(id);
       res.render("singleProduct.ejs", { product });
-    } catch {
+    } catch (error) {
+      logger.error("Producto no encontrado. Error: " + error);
       res.json({ error: "Producto no encontrado" });
     }
   } else {
     try {
       let products = await ProductDao.getAll();
       res.render("index.ejs", { products });
-    } catch {
+    } catch (error) {
+      logger.error("ID no encontrado. Error: " + error);
       res.json({ error: "Id no encontrado" });
     }
   }
@@ -27,6 +30,7 @@ const postProduct = (req, res) => {
     ProductDao.save(newProduct);
     res.redirect("/");
   } catch (error) {
+    logger.error("Error en petición POST. Error: " + error);
     res.json({ error: "Error en petición POST. Error: " + error });
   }
 };
@@ -37,8 +41,9 @@ const putProduct = async (req, res) => {
     let { name, description, code, thumbnail, price, stock } = req.body;
     let newProd = { name, description, code, thumbnail, price, stock };
     res.json(await ProductDao.updateProduct(id, newProd));
-  } catch (err) {
-    res.json({ error: "Producto no encontrado. Codigo " + err });
+  } catch (error) {
+    logger.error("Producto no encontrado. Error: " + error);
+    res.json({ error: "Producto no encontrado. Codigo " + error });
   }
 };
 
@@ -46,7 +51,8 @@ const deleteProduct = async (req, res) => {
   let id = req.params.id;
   try {
     res.json(await ProductDao.deleteById(id));
-  } catch {
+  } catch (error) {
+    logger.error("Producto no encontrado. Error: " + error);
     res.json({ error: "Producto no encontrado" });
   }
 };

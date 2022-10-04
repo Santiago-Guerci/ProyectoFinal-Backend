@@ -15,6 +15,7 @@ import compression from "compression";
 import MongoStore from "connect-mongo";
 import config from "./config/cliConfig.js";
 import sendMail from "./nodemailerConfig.js";
+import logger from "./logs/loggers.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -48,6 +49,10 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  logger.info(`Route: ${req.url} - Method: ${req.method}`);
+  next();
+});
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -108,7 +113,7 @@ const registerStrategy = new LocalStrategy(
       sendMail(process.env.ADMIN_MAIL, "New user", html);
       done(null, createdUser);
     } catch (error) {
-      console.log(`Sign Up error. Info: ${error}`);
+      logger.error(`Sign Up error. Info: ${error}`);
       done("Error en el registro", null);
     }
   }
@@ -128,7 +133,7 @@ const loginStrategy = new LocalStrategy(
 
       done(null, user);
     } catch (error) {
-      console.log(`Log In error. Info: ${error}`);
+      logger.error(`Log In error. Info: ${error}`);
       done("Error en el login", null);
     }
   }
@@ -162,7 +167,7 @@ if (mode == "cluster" && cluster.isPrimary) {
   app.use("/api/productos", productsRoutes);
   app.use("/api/carrito", cartsRoutes);
   app.get("*", (req, res) => {
-    console.log("Ruta no establecida");
+    logger.error("Ruta no establecida");
     res.render("error-route.ejs");
   });
 

@@ -1,3 +1,6 @@
+//ESTE ARCHIVO NO LO MODIFIQUE TODAVÍA XQ NO HICE LA LOGICA DEL CARRITO.
+//HAY QUE USAR RES.RENDER Y TODO ESO
+
 import { CartDao, ProductDao } from "../daos/index.js";
 
 const postCart = async (req, res) => {
