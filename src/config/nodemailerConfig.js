@@ -11,7 +11,7 @@ const sendMail = async (to, subject, message) => {
     port: 587,
     auth: {
       user: ADMIN_MAIL,
-      pass: process.env.PASS,
+      pass: process.env.ADMIN_PASS,
     },
   });
 

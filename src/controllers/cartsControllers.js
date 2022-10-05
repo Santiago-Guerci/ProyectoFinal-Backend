@@ -1,8 +1,6 @@
-//ESTE ARCHIVO NO LO MODIFIQUE TODAVÍA XQ NO HICE LA LOGICA DEL CARRITO.
-//HAY QUE USAR RES.RENDER Y TODO ESO
-
 import { CartDao, ProductDao } from "../daos/index.js";
 
+// NO LO ESTOY USANDO
 const postCart = async (req, res) => {
   res.json(await CartDao.createCart());
 };
@@ -16,6 +14,13 @@ const deleteCartById = async (req, res) => {
 const getProductsOnCartById = async (req, res) => {
   let id = req.params.id;
   res.json(await CartDao.getProductsById(id));
+};
+
+const getProductsOnCartByUserId = async (req, res) => {
+  let cartId = req.user.cartId.toString();
+  console.log(cartId.toString());
+  // let userCartProducts = await CartDao.getProductsById(cartId);
+  res.render("cart.ejs", { cartId });
 };
 
 //Actualmente estoy agarrando un producto del body en vez de traerlo desde la base de datos de productos.
@@ -38,4 +43,5 @@ export {
   getProductsOnCartById,
   postProductsOnCartById,
   deleteProductOfCartById,
+  getProductsOnCartByUserId,
 };

@@ -16,18 +16,7 @@
     <%- include("templates/navbar") %>
     
     <div class="container mt-3 mb-3 pt-3 pb-3 bg-light d-flex" id="cartContainer">
-      <% products.forEach((product) => { %>
-      <div class="card" style="width: 18rem; margin: 1rem">
-        <img src="<%= product.thumbnail %>" class="card-img-top" alt="<%= product.code %>" />
-        <div
-          style="text-align: center; background-color: rgb(168, 160, 160)"
-          class="card-body">
-          <h5 class="card-title"><%= product.name %></h5>
-          <p class="card-text"><%= product.description%></p>
-          <p class="btn btn-primary">$<%= product.price %></p>
-        </div>
-      </div>
-      <% }) %>
+      <p>hello! this is cart <%= cartId %></p>
     </div>
 
     <script>

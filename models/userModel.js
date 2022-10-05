@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   imageUrl: { type: String, required: true },
   role: { type: String, required: true },
-  cartId: { type: mongoose.Schema.Types.ObjectId, required: true }, //o tengo q poner type string??
+  cartId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  // cartId: { type: String, required: true },
 });
 
 const User = mongoose.model("user", userSchema);

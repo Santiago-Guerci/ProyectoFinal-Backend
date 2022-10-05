@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../public/uploads"));
+    cb(null, path.join(__dirname, "../../public/uploads"));
   },
   filename: (req, file, cb) => {
     cb(null, `avatar-${req.body.email}.jpg`);

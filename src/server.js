@@ -15,7 +15,7 @@ import bcrypt from "bcrypt";
 import compression from "compression";
 import MongoStore from "connect-mongo";
 import config from "./config/cliConfig.js";
-import sendMail from "./nodemailerConfig.js";
+import sendMail from "./config/nodemailerConfig.js";
 import logger from "./logs/loggers.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -78,7 +78,7 @@ const registerStrategy = new LocalStrategy(
         return done(null, null);
       }
 
-      let newCart = CartDao.createCart();
+      let newCart = await CartDao.createCart();
 
       const newUser = {
         email,
@@ -118,7 +118,7 @@ const registerStrategy = new LocalStrategy(
                 </div>
             `;
 
-      sendMail(process.env.ADMIN_MAIL, "New user", html);
+      await sendMail(process.env.ADMIN_MAIL, "New user", html);
       done(null, createdUser);
     } catch (error) {
       logger.error(`Sign Up error. Info: ${error}`);

@@ -12,7 +12,7 @@ import {
 } from "../controllers/apiController.js";
 import { authCheck } from "../middlewares/loginMW.js";
 import passport from "passport";
-import upload from "../multer.js";
+import upload from "../config/multerConfig.js";
 
 const router = Router();
 
