@@ -120,10 +120,10 @@ class MongoContainer {
     try {
       let cart = await this.getById(id);
       cart.products.push(myProd);
-      console.log(cart);
       let cartModel = new this.collection(cart);
       await cartModel.save();
       console.log(`The product ${myProd.name} has been added to cart ${id}`);
+      return cart.products;
     } catch (error) {
       logger.error(`Error pushing product in cart. Error: ${error}`);
     }

@@ -32,3 +32,18 @@
 {"code":"EAUTH","command":"API","level":"error","message":"error sending mail:  Missing credentials for \"PLAIN\"","stack":"Error: Missing credentials for \"PLAIN\"\n    at SMTPConnection._formatError (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:790:19)\n    at SMTPConnection.login (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:444:38)\n    at C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\nodemailer\\lib\\smtp-transport\\index.js:272:32\n    at SMTPConnection.<anonymous> (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:213:17)\n    at Object.onceWrapper (node:events:627:28)\n    at SMTPConnection.emit (node:events:513:28)\n    at SMTPConnection._actionEHLO (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:1325:14)\n    at SMTPConnection._processResponse (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:953:20)\n    at SMTPConnection._onData (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:755:14)\n    at TLSSocket.SMTPConnection._onSocketData (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:193:44)"}
 {"level":"error","message":"Endpoint getLogin. user not logged"}
 {"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Ruta no establecida"}
+{"level":"error","message":"Ruta no establecida"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Ruta no establecida"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Ruta no establecida"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Ruta no establecida"}
+{"level":"error","message":"Ruta no establecida"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Ruta no establecida"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
