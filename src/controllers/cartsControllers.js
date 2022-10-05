@@ -31,10 +31,11 @@ const postProductsOnCartById = async (req, res) => {
   res.redirect("/api/carrito");
 };
 
-const deleteProductOfCartById = (req, res) => {
-  let id = req.params.id;
+const deleteProductOfCartById = async (req, res) => {
+  let cartId = req.params.id;
   let prodId = req.params.id_prod;
-  res.json(CartDao.deleteProductOfCart(id, prodId));
+  await CartDao.deleteProductOfCart(cartId, prodId);
+  res.redirect("/api/carrito");
 };
 
 export {
