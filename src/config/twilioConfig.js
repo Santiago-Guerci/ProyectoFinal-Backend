@@ -5,7 +5,7 @@ dotenv.config();
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const smsNumber = process.env.TWILIO_NUMBER;
+const smsNumber = process.env.TWILIO_SMS_NUMBER;
 const wppNumber = process.env.TWILIO_WPP_NUMBER;
 
 const client = twilio(accountSid, authToken);

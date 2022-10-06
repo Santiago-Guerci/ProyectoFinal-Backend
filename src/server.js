@@ -3,7 +3,6 @@ import session from "express-session";
 import rutas from "./routes/routes.js";
 import productsRoutes from "./routes/productos.js";
 import cartsRoutes from "./routes/carritos.js";
-import pedidoRoutes from "./routes/pedido.route.js";
 import { User } from "../models/userModel.js";
 import { CartDao } from "./daos/index.js";
 import path from "path";
@@ -43,7 +42,7 @@ app.use(
     cookie: {
       httpOnly: false,
       secure: false,
-      maxAge: 20000,
+      maxAge: 120000,
     },
     rolling: true,
     resave: false,
@@ -175,7 +174,6 @@ if (mode == "cluster" && cluster.isPrimary) {
   app.use("/", rutas);
   app.use("/api/productos", productsRoutes);
   app.use("/api/carrito", cartsRoutes);
-  app.use("/api/pedido", pedidoRoutes);
   app.get("*", (req, res) => {
     logger.error("Ruta no establecida");
     res.render("error-route.ejs");

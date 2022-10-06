@@ -34,6 +34,9 @@
         </div>
         <% }) %>
 
+        <p>Cantidad de productos: </p>
+        <p>Monto total: $</p>
+
         <button class="btn btn-success" onclick="pedido()">Realizar pedido</button>
     </div>
 
@@ -45,7 +48,7 @@
         redirect("/logout");
       }
       function pedido() {
-        redirect("/api/pedido")
+        redirect("/api/carrito/<%= cartId %>/success")
       }
     </script>
     <script
