@@ -61,3 +61,21 @@
 {"level":"error","message":"Endpoint getLogin. user not logged"}
 {"level":"error","message":"Endpoint getLogin. user not logged"}
 {"code":21603,"level":"error","message":"Error sending sms:  A 'From' phone number is required.","moreInfo":"https://www.twilio.com/docs/errors/21603","stack":"Error: A 'From' phone number is required.\n    at success (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\twilio\\lib\\base\\Version.js:135:15)\n    at Promise_then_fulfilled (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\q\\q.js:766:44)\n    at Promise_done_fulfilled (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\q\\q.js:835:31)\n    at Fulfilled_dispatch [as dispatch] (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\q\\q.js:1229:9)\n    at Pending_become_eachMessage_task (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\q\\q.js:1369:30)\n    at RawTask.call (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\asap\\asap.js:40:19)\n    at flush (C:\\Santi\\Coder\\Backend-ProyectoFinal\\Proyecto-Final\\node_modules\\asap\\raw.js:50:29)\n    at processTicksAndRejections (node:internal/process/task_queues:78:11)","status":400}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}
+{"level":"error","message":"Endpoint getLogin. user not logged"}

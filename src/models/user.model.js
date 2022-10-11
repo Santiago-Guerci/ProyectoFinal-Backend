@@ -13,6 +13,6 @@ const userSchema = new mongoose.Schema({
   // cartId: { type: String, required: true },
 });
 
-const User = mongoose.model("user", userSchema);
+const userModel = mongoose.model("user", userSchema);
 
-export { User };
+export const User = userModel;

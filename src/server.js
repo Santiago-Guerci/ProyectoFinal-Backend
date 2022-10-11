@@ -1,9 +1,7 @@
 import express from "express";
 import session from "express-session";
 import rutas from "./routes/routes.js";
-import productsRoutes from "./routes/productos.js";
-import cartsRoutes from "./routes/carritos.js";
-import { User } from "../models/userModel.js";
+import { User } from "./models/user.model.js";
 import { CartDao } from "./daos/index.js";
 import path from "path";
 import { dirname } from "path";
@@ -172,12 +170,6 @@ if (mode == "cluster" && cluster.isPrimary) {
   });
 } else {
   app.use("/", rutas);
-  app.use("/api/productos", productsRoutes);
-  app.use("/api/carrito", cartsRoutes);
-  app.get("*", (req, res) => {
-    logger.error("Ruta no establecida");
-    res.render("error-route.ejs");
-  });
 
   app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port}`);
