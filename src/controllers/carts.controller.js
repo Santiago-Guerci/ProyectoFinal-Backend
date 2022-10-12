@@ -48,6 +48,7 @@ const deleteProductOfCartById = async (req, res) => {
 };
 
 const getSuccessBuy = async (req, res) => {
+  let cartId = req.user.cartId.toString();
   //Me falta hacer la lista de productos y enviarla en el mail y en el wpp.
   let userPhone = req.user.phone;
   let userName = req.user.name;
@@ -59,6 +60,7 @@ const getSuccessBuy = async (req, res) => {
     `Nuevo pedido de ${userName}. Email: ${userEmail}`,
     "Listado de productos"
   );
+  await cartService.emptyCart(cartId);
   res.render("success.ejs");
 };
 
