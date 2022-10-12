@@ -1,6 +1,6 @@
 import { createTransport } from "nodemailer";
 import dontenv from "dotenv";
-import logger from "../logs/loggers.js";
+import logger from "./logger.config.js";
 dontenv.config();
 
 const ADMIN_MAIL = process.env.ADMIN_MAIL;

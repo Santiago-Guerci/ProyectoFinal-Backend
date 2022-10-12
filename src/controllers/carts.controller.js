@@ -1,6 +1,7 @@
-import { CartDao, ProductDao } from "../daos/index.js";
-import { sendSms, sendWpp } from "../config/twilioConfig.js";
-import sendMail from "../config/nodemailerConfig.js";
+import { cartService } from "../services/cart.service.js";
+import { productService } from "../services/product.service.js";
+import { sendSms, sendWpp } from "../config/twilio.config.js";
+import sendMail from "../config/nodemailer.config.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -9,32 +10,32 @@ const ADMIN_MAIL = process.env.ADMIN_MAIL;
 
 // NO LO ESTOY USANDO
 const postCart = async (req, res) => {
-  res.json(await CartDao.createCart());
+  res.json(await cartService.createCart());
 };
 
 const deleteCartById = async (req, res) => {
   let id = req.params.id;
-  await CartDao.emptyCart(id);
-  res.json(await CartDao.deleteCart(id));
+  await cartService.emptyCart(id);
+  res.json(await cartService.deleteCart(id));
 };
 
 const getProductsOnCartById = async (req, res) => {
   let id = req.params.id;
-  res.json(await CartDao.getProductsById(id));
+  res.json(await cartService.cartProducts(id));
 };
 
 const getProductsOnCartByUserId = async (req, res) => {
   let cartId = req.user.cartId.toString();
-  let userCartProducts = await CartDao.getProductsById(cartId);
+  let userCartProducts = await cartService.cartProducts(cartId);
   res.render("cart.ejs", { cartId, userCartProducts });
 };
 
 //Actualmente estoy agarrando un producto del body en vez de traerlo desde la base de datos de productos.
-//CORREGIDO, PUSE EL PRODUCTDAO.GETBYID PARA TRAERLO DE LA BASE DE DATOS
+//CORREGIDO, PUSE EL productService.GETBYID PARA TRAERLO DE LA BASE DE DATOS
 const postProductsOnCartById = async (req, res) => {
   let cartId = req.user.cartId.toString();
-  let prodId = await ProductDao.getById(req.params.id);
-  await CartDao.postProductOnCart(cartId, prodId);
+  let product = await productService.getOneProduct(req.params.id);
+  await cartService.insertProductOnCart(cartId, product);
   res.redirect("/api/carrito");
 };
 
@@ -42,7 +43,7 @@ const deleteProductOfCartById = async (req, res) => {
   //Algo está saliendo mal con el splice. Además, tengo que hacer logica de stock para que no se carguen 2 productos iguales con mismo ID.
   let cartId = req.params.id;
   let prodId = req.params.id_prod;
-  await CartDao.deleteProductOfCart(cartId, prodId);
+  await cartService.deleteProductOfCart(cartId, prodId);
   res.redirect("/api/carrito");
 };
 

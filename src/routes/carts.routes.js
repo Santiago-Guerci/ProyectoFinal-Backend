@@ -9,7 +9,7 @@ import {
   deleteProductOfCartById,
   getProductsOnCartByUserId,
   getSuccessBuy,
-} from "../controllers/cartsControllers.js";
+} from "../controllers/carts.controller.js";
 import { authCheck } from "../middlewares/loginMW.js";
 
 router.get("/", authCheck, getProductsOnCartByUserId);

@@ -2,7 +2,7 @@ import express from "express";
 import session from "express-session";
 import rutas from "./routes/routes.js";
 import { User } from "./models/user.model.js";
-import { CartDao } from "./daos/index.js";
+import { cartService } from "./services/cart.service.js";
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -12,11 +12,13 @@ import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcrypt";
 import compression from "compression";
 import MongoStore from "connect-mongo";
-import config from "./config/cliConfig.js";
-import sendMail from "./config/nodemailerConfig.js";
-import logger from "./logs/loggers.js";
+import config from "./config/cli.config.js";
+import sendMail from "./config/nodemailer.config.js";
+import logger from "./config/logger.config.js";
 import dotenv from "dotenv";
+import mongoConnection from "./config/db.config.js";
 dotenv.config();
+mongoConnection();
 
 const app = express();
 const port = config.port;
@@ -76,7 +78,7 @@ const registerStrategy = new LocalStrategy(
         return done(null, null);
       }
 
-      let newCart = await CartDao.createCart();
+      let newCart = await cartService.createCart();
 
       const newUser = {
         email,

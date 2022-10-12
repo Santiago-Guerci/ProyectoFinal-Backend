@@ -9,10 +9,10 @@ import {
   signupFail,
   getLogout,
   getInfo,
-} from "../controllers/apiController.js";
+} from "../controllers/login.controller.js";
 import { authCheck } from "../middlewares/loginMW.js";
 import passport from "passport";
-import upload from "../config/multerConfig.js";
+import upload from "../config/multer.config.js";
 
 const router = Router();
 

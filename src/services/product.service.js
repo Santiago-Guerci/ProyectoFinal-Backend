@@ -1,4 +1,4 @@
-import { productDao } from "../daos/product.dao";
+import { productDao } from "../daos/product.dao.js";
 
 const createProduct = async (product) => {
   if (typeof product.name !== "string") throw "Name must be a string!";
@@ -10,7 +10,7 @@ const createProduct = async (product) => {
   if (typeof product.price !== "number") throw "Price must be a number!";
   if (typeof product.stock !== "number") throw "Stock must be a number!";
 
-  const createdProduct = productDao.save(product);
+  const createdProduct = await productDao.save(product);
 
   return createdProduct;
 };
@@ -18,7 +18,7 @@ const createProduct = async (product) => {
 const getOneProduct = async (id) => {
   if (typeof id !== "string") throw "Product ID must be a string";
 
-  const product = await productDao.getProductById(id);
+  const product = await productDao.getById(id);
 
   if (!product) throw "Product doesn't exist";
 

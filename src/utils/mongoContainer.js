@@ -1,6 +1,6 @@
-import config from "../config/dbConfig.js";
+import config from "../config/db.config.js";
 import mongoose from "mongoose";
-import logger from "../logs/loggers.js";
+import logger from "../config/logger.config.js";
 
 await mongoose
   .connect(config.mongodb.connectionString)

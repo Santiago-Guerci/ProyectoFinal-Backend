@@ -1,5 +1,5 @@
 import os from "os";
-import logger from "../logs/loggers.js";
+import logger from "../config/logger.config.js";
 
 const mainRoute = (req, res) => {
   let name = req.user.name;
