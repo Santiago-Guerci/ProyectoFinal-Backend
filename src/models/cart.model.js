@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const cartSchema = new mongoose.Schema({
-  timestamp: { type: Date, required: true },
-  products: { type: Array, required: true },
-});
+const cartSchema = new mongoose.Schema(
+  { products: { type: Array, required: true } },
+  { timestamps: true }
+);
 
 const cartModel = mongoose.model("cart", cartSchema);
 

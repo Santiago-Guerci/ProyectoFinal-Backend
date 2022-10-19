@@ -2,7 +2,6 @@ import { Product } from "../models/product.model.js";
 
 //METODOS DE PRODUCTOS
 const save = async (object) => {
-  object.timestamp = Date.now();
   const objectModel = new Product(object);
   const newObj = await objectModel.save();
   return newObj;

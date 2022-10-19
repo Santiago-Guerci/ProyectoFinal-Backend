@@ -7,9 +7,8 @@ const getCartById = async (id) => {
 };
 
 const createCart = async () => {
-  let timestamp = Date.now();
   let products = [];
-  const cartModel = new Cart({ timestamp, products });
+  const cartModel = new Cart({ products });
   const newCart = await cartModel.save();
   return newCart;
 };
