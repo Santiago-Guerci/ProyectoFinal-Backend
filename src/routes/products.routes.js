@@ -1,10 +1,5 @@
 import { Router } from "express";
-import {
-  getProductOrAll,
-  postProduct,
-  putProduct,
-  deleteProduct,
-} from "../controllers/products.controller.js";
+import { getProductOrAll, postProduct, putProduct, deleteProduct } from "../controllers/products.controller.js";
 import { authCheck } from "../middlewares/loginMW.js";
 
 const router = Router();
