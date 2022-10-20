@@ -1,57 +1,86 @@
 import { Cart } from "../models/cart.model.js";
+import BaseRepository from "./baseRepository.js";
 
-//METODOS DE CARRITOS
-const getCartById = async (id) => {
-  const cart = await Cart.findOne({ _id: id }, { __v: 0 });
-  return cart;
-};
+let instance;
 
-const createCart = async () => {
-  let products = [];
-  const cartModel = new Cart({ products });
-  const newCart = await cartModel.save();
-  return newCart;
-};
+class CartDao extends BaseRepository {
+  constructor() {
+    super(Cart);
+  }
 
-const emptyCart = async (id) => {
-  await Cart.updateOne({ _id: id }, { $set: { products: [] } });
-  console.log(`The cart ${id} has been emptied`);
-};
+  async createCart() {
+    let products = [];
+    await this.create(new Cart({ products }));
+  }
 
-const deleteCart = async (id) => {
-  await Cart.deleteOne({ _id: id });
-};
+  async emptyCart(id) {
+    await Cart.updateOne({ _id: id }, { $set: { products: [] } });
+  }
 
-const getProductsById = async (id) => {
-  let cart = await getCartById(id);
-  return cart.products;
-};
+  async getCartProducts(id) {
+    let cart = await this.getById(id);
+    return cart.products;
+  }
 
-//De los productos que ya tengo, cada prod tiene un id. Lo agarro, y lo meto en el cart solicitado (lo agarro por req.body)
-const postProductOnCart = async (id, myProd) => {
-  let cart = await getCartById(id);
-  cart.products.push(myProd);
-  let cartModel = new Cart(cart);
-  await cartModel.save();
-};
+  async saveProductOnCart(id, product) {
+    let cart = await this.getById(id);
+    cart.products.push(product);
+    await this.create(new Cart(cart));
+  }
 
-const deleteProductOfCart = async (id, prodId) => {
-  let cart = await getCartById(id);
-  let cartProds = await getProductsById(id);
-  let index = cartProds.indexOf(prodId);
-  cart.products.splice(index, 1);
+  async deleteProductOfCart(id, productId) {
+    let cart = await this.getById(id);
+    let cartProducts = await this.getCartProducts(id);
+    let index = cartProducts.indexOf(productId);
+    cart.products.splice(index, 1);
 
-  let cartModel = new Cart(cart);
-  await cartModel.save();
-};
-//FIN METODOS DE CARRITOS
+    await this.create(new Cart(cart));
+  }
 
-export const cartDao = {
-  getCartById,
-  createCart,
-  emptyCart,
-  deleteCart,
-  getProductsById,
-  postProductOnCart,
-  deleteProductOfCart,
-};
+  static getInstance() {
+    if (!instance) {
+      instance = new CartDao();
+    }
+    return instance;
+  }
+}
+
+// const deleteProductOfCart = async (id, prodId) => {
+//   let cart = await getCartById(id);
+//   let cartProds = await getProductsById(id);
+//   let index = cartProds.indexOf(prodId);
+//   cart.products.splice(index, 1);
+
+//   let cartModel = new Cart(cart);
+//   await cartModel.save();
+// };
+
+// const postProductOnCart = async (id, myProd) => {
+//   let cart = await getCartById(id);
+//   cart.products.push(myProd);
+//   let cartModel = new Cart(cart);
+//   await cartModel.save();
+// };
+
+// const createCart = async () => {
+//   let products = [];
+//   const cartModel = new Cart({ products });
+//   const newCart = await cartModel.save();
+//   return newCart;
+// };
+
+// const emptyCart = async (id) => {
+//   await Cart.updateOne({ _id: id }, { $set: { products: [] } });
+//   console.log(`The cart ${id} has been emptied`);
+// };
+
+// const deleteCart = async (id) => {
+//   await Cart.deleteOne({ _id: id });
+// };
+
+// const getProductsById = async (id) => {
+//   let cart = await getCartById(id);
+//   return cart.products;
+// };
+
+export default CartDao;

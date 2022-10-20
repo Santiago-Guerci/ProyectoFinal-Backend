@@ -1,17 +1,17 @@
-import { userDao } from "../daos/user.dao.js";
+import UserDao from "../daos/user.dao.js";
 
 const createUser = async (newUser) => {
-  const createdUser = await userDao.createUser(newUser);
+  const createdUser = await UserDao.create(newUser);
   return createdUser;
 };
 
 const checkUser = async (email) => {
-  const existingUser = await userDao.checkUser(email);
+  const existingUser = await UserDao.checkUser(email);
   return existingUser;
 };
 
 const getUserById = async (id, done) => {
-  const user = await userDao.getUserById(id, done);
+  const user = await UserDao.getById(id, done);
   return user;
 };
 

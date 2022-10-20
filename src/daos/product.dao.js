@@ -1,41 +1,19 @@
 import { Product } from "../models/product.model.js";
+import { BaseRepository } from "./baseRepository.js";
 
-//METODOS DE PRODUCTOS
-const save = async (object) => {
-  const objectModel = new Product(object);
-  const newObj = await objectModel.save();
-  return newObj;
-};
+let instance;
 
-const getById = async (id) => {
-  const product = await Product.findOne({ _id: id }, { __v: 0 });
-  return product;
-};
+class ProductDao extends BaseRepository {
+  constructor() {
+    super(Product);
+  }
 
-const getAll = async () => {
-  const products = await Product.find({}, { __v: 0 });
-  return products;
-};
+  getInstance() {
+    if (!instance) {
+      instance = new ProductDao();
+    }
+    return instance;
+  }
+}
 
-const updateProduct = async (id, props) => {
-  const updatedProduct = await Product.updateOne({ _id: id }, props);
-  return updatedProduct;
-};
-
-const deleteById = async (id) => {
-  await Product.deleteOne({ _id: id });
-};
-
-const deleteAll = async () => {
-  await Product.deleteMany({});
-};
-//FIN METODOS DE PRODUCTOS
-
-export const productDao = {
-  save,
-  getById,
-  getAll,
-  updateProduct,
-  deleteById,
-  deleteAll,
-};
+export default ProductDao;

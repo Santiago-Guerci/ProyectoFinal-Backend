@@ -1,15 +1,17 @@
-import { productDao } from "../daos/product.dao.js";
+import ProductDao from "../daos/product.dao.js";
 import { ProductDto } from "../dtos/product.dto.js";
 
 const createProduct = async (product) => {
   if (typeof product.name !== "string") throw "Name must be a string!";
-  if (typeof product.description !== "string") throw "Description must be a string!";
+  if (typeof product.description !== "string")
+    throw "Description must be a string!";
   if (typeof product.code !== "string") throw "Code must be a string!";
-  if (typeof product.thumbnail !== "string") throw "Thumbnail must be a string!";
+  if (typeof product.thumbnail !== "string")
+    throw "Thumbnail must be a string!";
   if (typeof product.price !== "number") throw "Price must be a number!";
   if (typeof product.stock !== "number") throw "Stock must be a number!";
 
-  const createdProduct = await productDao.save(product);
+  const createdProduct = await ProductDao.create(product);
   const productDto = new ProductDto(createdProduct);
 
   return productDto;
@@ -18,7 +20,7 @@ const createProduct = async (product) => {
 const getOneProduct = async (id) => {
   if (typeof id !== "string") throw "Product ID must be a string";
 
-  const product = await productDao.getById(id);
+  const product = await ProductDao.getById(id);
   const productDto = new ProductDto(product);
 
   if (!product) throw "Product doesn't exist";
@@ -27,7 +29,7 @@ const getOneProduct = async (id) => {
 };
 
 const getAllProducts = async () => {
-  const data = await productDao.getAll();
+  const data = await ProductDao.getAll();
   const productDtos = [];
   data.forEach((product) => {
     productDtos.push(new ProductDto(product));
@@ -37,24 +39,21 @@ const getAllProducts = async () => {
 
 const updateProduct = async (id, props) => {
   if (typeof props.name !== "string") throw "Name must be a string!";
-  if (typeof props.description !== "string") throw "Description must be a string!";
+  if (typeof props.description !== "string")
+    throw "Description must be a string!";
   if (typeof props.code !== "string") throw "Code must be a string!";
   if (typeof props.thumbnail !== "string") throw "Thumbnail must be a string!";
   if (typeof props.price !== "number") throw "Price must be a number!";
   if (typeof props.stock !== "number") throw "Stock must be a number!";
   if (typeof id !== "string") throw "Product ID must be a string";
 
-  const updatedProduct = await productDao.updateProduct(id, props);
+  const updatedProduct = await ProductDao.update(id, props);
   return updatedProduct;
 };
 
 const deleteProduct = async (id) => {
   if (typeof id !== "string") throw "Product ID must be a string";
-  await productDao.deleteById(id);
-};
-
-const deleteAllProducts = async () => {
-  await productDao.deleteAll();
+  await ProductDao.deleteById(id);
 };
 
 export const productService = {
@@ -63,5 +62,4 @@ export const productService = {
   getAllProducts,
   updateProduct,
   deleteProduct,
-  deleteAllProducts,
 };
