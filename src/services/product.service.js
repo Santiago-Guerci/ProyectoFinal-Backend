@@ -1,5 +1,5 @@
-import ProductDao from "../daos/product.dao.js";
-import { ProductDto } from "../dtos/product.dto.js";
+import { productDao } from "../daos/product.dao.js";
+import ProductDto from "../dtos/product.dto.js";
 
 const createProduct = async (product) => {
   if (typeof product.name !== "string") throw "Name must be a string!";
@@ -11,7 +11,7 @@ const createProduct = async (product) => {
   if (typeof product.price !== "number") throw "Price must be a number!";
   if (typeof product.stock !== "number") throw "Stock must be a number!";
 
-  const createdProduct = await ProductDao.create(product);
+  const createdProduct = await productDao.create(product);
   const productDto = new ProductDto(createdProduct);
 
   return productDto;
@@ -20,16 +20,16 @@ const createProduct = async (product) => {
 const getOneProduct = async (id) => {
   if (typeof id !== "string") throw "Product ID must be a string";
 
-  const product = await ProductDao.getById(id);
+  const product = await productDao.getById(id);
   const productDto = new ProductDto(product);
 
-  if (!product) throw "Product doesn't exist";
-
+  if (!productDto) throw "Product doesn't exist";
+  console.log(productDto);
   return productDto;
 };
 
 const getAllProducts = async () => {
-  const data = await ProductDao.getAll();
+  const data = await productDao.getAll();
   const productDtos = [];
   data.forEach((product) => {
     productDtos.push(new ProductDto(product));
@@ -47,13 +47,13 @@ const updateProduct = async (id, props) => {
   if (typeof props.stock !== "number") throw "Stock must be a number!";
   if (typeof id !== "string") throw "Product ID must be a string";
 
-  const updatedProduct = await ProductDao.update(id, props);
+  const updatedProduct = await productDao.update(id, props);
   return updatedProduct;
 };
 
 const deleteProduct = async (id) => {
   if (typeof id !== "string") throw "Product ID must be a string";
-  await ProductDao.deleteById(id);
+  await productDao.deleteById(id);
 };
 
 export const productService = {

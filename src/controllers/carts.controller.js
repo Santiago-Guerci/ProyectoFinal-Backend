@@ -35,6 +35,7 @@ const getProductsOnCartByUserId = async (req, res) => {
 const postProductsOnCartById = async (req, res) => {
   let cartId = req.user.cartId.toString();
   let product = await productService.getOneProduct(req.params.id);
+  console.log(`My cart id is ${cartId} product is ${product}`);
   await cartService.insertProductOnCart(cartId, product);
   res.redirect("/api/carrito");
 };

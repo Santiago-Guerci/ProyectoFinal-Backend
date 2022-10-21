@@ -1,5 +1,5 @@
 import { Product } from "../models/product.model.js";
-import { BaseRepository } from "./baseRepository.js";
+import BaseRepository from "./baseRepository.js";
 
 let instance;
 
@@ -16,4 +16,4 @@ class ProductDao extends BaseRepository {
   }
 }
 
-export default ProductDao;
+export const productDao = new ProductDao();

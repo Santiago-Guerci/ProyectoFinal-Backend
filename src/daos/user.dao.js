@@ -21,4 +21,4 @@ class UserDao extends BaseRepository {
   }
 }
 
-export default UserDao;
+export const userDao = new UserDao();

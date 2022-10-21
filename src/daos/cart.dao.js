@@ -10,7 +10,8 @@ class CartDao extends BaseRepository {
 
   async createCart() {
     let products = [];
-    await this.create(new Cart({ products }));
+    let cart = await this.create(new Cart({ products }));
+    return cart;
   }
 
   async emptyCart(id) {
@@ -83,4 +84,4 @@ class CartDao extends BaseRepository {
 //   return cart.products;
 // };
 
-export default CartDao;
+export const cartDao = new CartDao();

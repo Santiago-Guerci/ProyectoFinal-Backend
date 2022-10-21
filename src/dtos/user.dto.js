@@ -1,6 +1,6 @@
 class UserDto {
   constructor({_id, email, name, address, age, phone, imageUrl, role, cartId }) {
-    this.id = _id,
+    this._id = _id,
     this.email = email,
     this.name = name,
     this.address = address,
