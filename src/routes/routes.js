@@ -11,7 +11,7 @@ router.use("/api/productos", productRouter);
 router.use("/api/carrito", cartRouter);
 router.get("*", (req, res) => {
   logger.error("Ruta no establecida");
-  res.render("error-route.ejs");
+  res.status(404).render("error-route.ejs");
 });
 
 export default router;
