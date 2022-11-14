@@ -10,7 +10,7 @@ import {
   getLogout,
   getInfo,
 } from "../controllers/login.controller.js";
-import { authCheck } from "../middlewares/loginMW.js";
+import { authCheck } from "../middlewares/login.mw.js";
 import passport from "passport";
 import upload from "../config/multer.config.js";
 

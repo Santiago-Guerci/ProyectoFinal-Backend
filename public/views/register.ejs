@@ -21,40 +21,15 @@
 
       <form action="/register" method="post" enctype="multipart/form-data">
         <h2 class="text-primary">Regístrese</h2>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="sucorreo@correo.com"
-        />
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Contraseña"
-        />
+        <input type="email" id="email" name="email" placeholder="sucorreo@correo.com" />
+        <input type="password" id="password" name="password" placeholder="Contraseña" />
+        <input type="password" id="repeatPassword" name="repeatPassword" placeholder="Repetir contraseña" />
         <input type="text" id="name" name="name" placeholder="Su nombre" />
-        <input
-          type="text"
-          id="address"
-          name="address"
-          placeholder="Dirección"
-        />
+        <input type="text" id="address" name="address" placeholder="Dirección"/>
         <input type="number" id="age" name="age" placeholder="Su edad" />
-        <input
-          type="number"
-          id="phone"
-          name="phone"
-          placeholder="+541130373577"
-        />
+        <input type="number" id="phone" name="phone" placeholder="+541130373577" />
         <input type="file" id="profilePic" name="profilePic" />
-        <input
-          type="submit"
-          name="submitSignup"
-          id="submitSignup"
-          class="btn btn-success"
-          value="Sign Up"
-        />
+        <input type="submit" name="submitSignup" id="submitSignup" class="btn btn-success" value="Sign Up" />
       </form>
       <button class="btn btn-primary" onclick="volver()">Log In</button>
       <button class="btn btn-primary" onclick="info()">Info</button>

@@ -12,11 +12,15 @@ dotenv.config();
 const registerStrategy = new LocalStrategy(
   { passReqToCallback: true, usernameField: "email" },
   async (req, username, password, done) => {
-    let { email, name, address, age, phone } = req.body;
+    let { email, name, address, age, phone, repeatPassword } = req.body;
     try {
       const existingUser = await User.findOne({ email });
       if (existingUser) {
         return done(null, null);
+      }
+
+      if(password !== repeatPassword) {
+        return done("Las contraseñas no coinciden", null);
       }
 
       let newCart = await cartService.createCart();
@@ -28,9 +32,7 @@ const registerStrategy = new LocalStrategy(
         address,
         age,
         phone,
-        imageUrl: `${req.protocol}://${req.get(
-          "host"
-        )}/public/uploads/avatar-${email}.jpg`,
+        imageUrl: `${req.protocol}://${req.get("host")}/public/uploads/avatar-${email}.jpg`,
         role: "user",
         cartId: newCart,
       };
