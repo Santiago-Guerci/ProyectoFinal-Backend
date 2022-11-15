@@ -1,0 +1,21 @@
+POR HACER:
+- Hacer buena estructura MVC, que este bien separada cada capa
+- Server > rutas > controladores > servicios > daos > DB
+- Los middlewares van en las rutas
+- Los dtos los genera el servicio para enviar solamente la info necesaria al front
+- Los models se utilizan en los daos para generar instancias de objetos con la info de la base de datos
+
+1) Archivo de texto con todas las variables de entorno (chequear after, no subir al repo solo mandarselo a salva)
+2) HACER LA LOGICA DEL CARRITO, CON CANTIDAD DE PRODUCTOS Y ETC
+3) HACER EL CHAT EN UNA PAGINA APARTE /CHAT
+4) Comentar bien el codigo
+5) Cuando se envia un mensaje de error, renderizar una sola plantilla enviandole el error y que muestre el correspondiente
+6) Armar mejor el css, los productos con su respectiva imagen, etc
+
+YA HECHO:
+1) Pase el .env 
+2) Arregle el modo cluster
+3) Separe la configuracion de passport
+4) La estructura esta bastante bien separada creo yo
+5) Verificar contraseña ya esta
+

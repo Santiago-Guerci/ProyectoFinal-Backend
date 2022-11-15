@@ -14,6 +14,7 @@ import logger from "./config/logger.config.js";
 import dotenv from "dotenv";
 import os from "os";
 import mongoConnection from "./config/db.config.js";
+import { chatConfig } from "./config/socket.config.js";
 dotenv.config();
 
 //Me conecto a la base de datos
@@ -63,6 +64,8 @@ app.use(passport.session());
 passportConfig();
 
 app.use(compression());
+
+chatConfig();
 
 //Logica de seleccion de modo cluster o modo fork
 if (mode == "cluster" && cluster.isPrimary) {

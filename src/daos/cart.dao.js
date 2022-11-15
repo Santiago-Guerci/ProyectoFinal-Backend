@@ -29,6 +29,8 @@ class CartDao extends BaseRepository {
     await this.create(new Cart(cart));
   }
 
+  //El splice esta funcionando mal, el id que busco siempre es unico por producto, por ende si agrego 2 productos
+  //tengo 2 veces el mismo id. Tengo que arreglar eso.
   async deleteProductOfCart(id, productId) {
     let cart = await this.getById(id);
     let cartProducts = await this.getCartProducts(id);
