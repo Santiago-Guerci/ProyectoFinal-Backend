@@ -27,21 +27,22 @@ const getProductsOnCartById = async (req, res) => {
 const getProductsOnCartByUserId = async (req, res) => {
   let cartId = req.user.cartId.toString();
   let userCartProducts = await cartService.cartProducts(cartId);
-  res.render("cart.ejs", { cartId, userCartProducts });
+  let productsQuantity = userCartProducts.length;
+  let totalPrice = 0;
+  userCartProducts.forEach(product => {
+    totalPrice += product.price;
+  })
+  res.render("cart.ejs", { cartId, userCartProducts, productsQuantity, totalPrice });
 };
 
-//Actualmente estoy agarrando un producto del body en vez de traerlo desde la base de datos de productos.
-//CORREGIDO, PUSE EL productService.GETBYID PARA TRAERLO DE LA BASE DE DATOS
 const postProductsOnCartById = async (req, res) => {
   let cartId = req.user.cartId.toString();
   let product = await productService.getOneProduct(req.params.id);
-  console.log(`My cart id is ${cartId} product is ${product}`);
   await cartService.insertProductOnCart(cartId, product);
   res.redirect("/api/carrito");
 };
 
 const deleteProductOfCartById = async (req, res) => {
-  //Algo está saliendo mal con el splice. Además, tengo que hacer logica de stock para que no se carguen 2 productos iguales con mismo ID.
   let cartId = req.params.id;
   let prodId = req.params.id_prod;
   await cartService.deleteProductOfCart(cartId, prodId);

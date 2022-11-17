@@ -28,7 +28,7 @@
               <p class="card-text"><%= product.description%></p>
               <p class="btn btn-primary">$<%= product.price %></p>
               <form action="/api/carrito/<%= cartId %>/productos/<%= product._id %>" method="post">
-                <button class="btn btn-danger" name="addToCart" value="addToCart" type="submit"> X </button>
+                <button class="btn btn-danger" name="removeFromCart" value="removeFromCart" type="submit"> X </button>
               </form>
             </div>
           </div>
@@ -37,8 +37,8 @@
 
       <ul class="list-group">
         <li class="list-group-item active" aria-current="true">Cart ID: <%= cartId %> </li>
-        <li class="list-group-item">Cantidad de productos: </li>
-        <li class="list-group-item">Monto total: </li>
+        <li class="list-group-item">Cantidad de productos: <%= productsQuantity %></li>
+        <li class="list-group-item">Monto total: <%= totalPrice %></li>
         <li class="list-group-item"><button class="btn btn-success" onclick="pedido()">Realizar pedido</button></li>
       </ul>
       

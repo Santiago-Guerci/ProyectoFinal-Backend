@@ -24,7 +24,6 @@ const getOneProduct = async (id) => {
   const productDto = new ProductDto(product);
 
   if (!productDto) throw "Product doesn't exist";
-  console.log(productDto);
   return productDto;
 };
 
