@@ -1,15 +1,16 @@
 import express from "express";
-import { Server as HttpServer } from "http";
-import { Server as Socket } from "socket.io";
-import { chatService } from "../services/chat.service";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import { chatService } from "../services/chat.service.js";
+import logger from "./logger.config.js";
 
 const app = express();
-const httpServer = new HttpServer(app);
-const io = new Socket(httpServer);
+const httpServer = createServer(app);
+const io = new Server(httpServer);
 
 const chatConfig = () => {
   io.on("connection", async (socket) => {
-    console.log(`Se conectó el id ${socket.id}`);
+    logger.info(`Se conectó el id ${socket.id}`);
 
     const mensajes = await chatService.getAllMessages();
 
@@ -17,8 +18,14 @@ const chatConfig = () => {
 
     socket.on("client:messages", async (messageInfo) => {
       await chatService.createMessage(messageInfo);
+      const newMessages = await chatService.getAllMessages();
+      io.emit("server:messages", newMessages);
     });
   });
 };
 
-export default chatConfig;
+const deleteMessages = async () => {
+  await chatService.deleteAllMessages();
+};
+
+export { chatConfig, app, httpServer, deleteMessages };

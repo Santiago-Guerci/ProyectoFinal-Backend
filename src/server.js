@@ -14,14 +14,13 @@ import logger from "./config/logger.config.js";
 import dotenv from "dotenv";
 import os from "os";
 import mongoConnection from "./config/db.config.js";
-import { chatConfig } from "./config/socket.config.js";
+import { chatConfig, app, httpServer, deleteMessages } from "./config/socket.config.js";
 dotenv.config();
 
 //Me conecto a la base de datos
 mongoConnection();
 
 //Seteo del servidor, comandos de linea, configuracion del dirname y el uso de las plantillas.
-const app = express();
 const port = config.port;
 const mode = config.mode;
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -52,20 +51,23 @@ app.use(
   })
 );
 
-//Seteo el logger como middleware para todas las rutas
-app.use((req, res, next) => {
-  logger.info(`Route: ${req.url} - Method: ${req.method}`);
-  next();
-});
-
 //Inicializo passport para las sesiones de usuarios.
 app.use(passport.initialize());
 app.use(passport.session());
 passportConfig();
 
+//Ejecuto el socket.io para el chat, y limpio los mensajes cada 24 horas.
+chatConfig();
+const delay = 1000 * 60 * 60 * 24; //Son 24 horas.
+setInterval(deleteMessages, delay);
+
 app.use(compression());
 
-chatConfig();
+//Seteo el logger como middleware para todas las rutas
+app.use((req, res, next) => {
+  logger.info(`Route: ${req.url} - Method: ${req.method}`);
+  next();
+});
 
 //Logica de seleccion de modo cluster o modo fork
 if (mode == "cluster" && cluster.isPrimary) {
@@ -80,7 +82,7 @@ if (mode == "cluster" && cluster.isPrimary) {
 } else {
   app.use("/", rutas);
 
-  app.listen(port, () => {
+  httpServer.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port}`);
   });
 }

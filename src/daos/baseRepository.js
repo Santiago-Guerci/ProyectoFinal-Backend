@@ -26,6 +26,10 @@ class BaseRepository {
   async deleteById(id) {
     return await this.model.deleteOne({ _id: id });
   }
+
+  async deleteAll() {
+    return await this.model.deleteMany({});
+  }
 }
 
 export default BaseRepository;

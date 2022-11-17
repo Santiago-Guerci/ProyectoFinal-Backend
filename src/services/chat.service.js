@@ -1,4 +1,4 @@
-import { chatDao } from "../daos/chat.dao";
+import { chatDao } from "../daos/chat.dao.js";
 
 const createMessage = async (message) => {
   if (typeof message.email !== "string") throw "Email must be a string";
@@ -14,4 +14,8 @@ const getAllMessages = async () => {
   return messages;
 };
 
-export const chatService = { createMessage, getAllMessages };
+const deleteAllMessages = async () => {
+  return await chatDao.deleteAll();
+};
+
+export const chatService = { createMessage, getAllMessages, deleteAllMessages };

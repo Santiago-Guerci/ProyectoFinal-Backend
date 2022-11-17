@@ -1,8 +1,7 @@
-import { Chat } from "../models/chat.model";
-import BaseRepository from "./baseRepository";
+import { Chat } from "../models/chat.model.js";
+import BaseRepository from "./baseRepository.js";
 
 let instance;
-
 class ChatDao extends BaseRepository {
   constructor() {
     super(Chat);
