@@ -19,17 +19,43 @@
     <div class="container mt-3 pb-3 bg-light">
       <h1>Sign Up</h1>
 
-      <form action="/register" method="post" enctype="multipart/form-data">
-        <h2 class="text-primary">Regístrese</h2>
-        <input type="email" id="email" name="email" placeholder="sucorreo@correo.com" />
-        <input type="password" id="password" name="password" placeholder="Contraseña" />
-        <input type="password" id="repeatPassword" name="repeatPassword" placeholder="Repetir contraseña" />
-        <input type="text" id="name" name="name" placeholder="Su nombre" />
-        <input type="text" id="address" name="address" placeholder="Dirección"/>
-        <input type="number" id="age" name="age" placeholder="Su edad" />
-        <input type="number" id="phone" name="phone" placeholder="+541130373577" />
-        <input type="file" id="profilePic" name="profilePic" />
-        <input type="submit" name="submitSignup" id="submitSignup" class="btn btn-success" value="Sign Up" />
+      <h2 class="text-primary">Regístrese</h2>
+      <form action="/register" method="post" enctype="multipart/form-data" class="row g-3">
+        <div class="col-md-4">
+          <label for="email" class="form-label"> Email </label>
+          <input class="form-control" type="email" id="email" name="email" placeholder="sucorreo@correo.com" />
+        </div>
+        <div class="col-md-4">
+          <label for="password" class="form-label">Password</label>
+          <input class="form-control" type="password" id="password" name="password" placeholder="Contraseña" />
+        </div>
+        <div class="col-md-4">
+          <label for="repeatPassword" class="form-label">Repeat Password</label>
+          <input class="form-control" type="password" id="repeatPassword" name="repeatPassword" placeholder="Repetir contraseña" />
+        </div>
+        <div class="col-12">
+          <label for="name" class="form-label">Name</label>
+          <input class="form-control" type="text" id="name" name="name" placeholder="Su nombre" />
+        </div>
+        <div class="col-12">
+          <label for="address" class="form-label">Address</label>
+          <input class="form-control" type="text" id="address" name="address" placeholder="Dirección"/>
+        </div>
+        <div class="col-md-6">
+          <label for="age" class="form-label">Age</label>
+          <input class="form-control" type="number" id="age" name="age" placeholder="Su edad" />
+        </div>
+        <div class="col-md-6">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input class="form-control" type="number" id="phone" name="phone" placeholder="+541130373577" />
+        </div>
+        <div class="col-md-6">
+          <label for="profilePic" class="form-label">Profile Image</label>
+          <input class="form-control" type="file" id="profilePic" name="profilePic" />
+        </div>
+        <div class="col-12">
+          <input type="submit" name="submitSignup" id="submitSignup" class="btn btn-success" value="Sign Up" />
+        </div>
       </form>
       <button class="btn btn-primary" onclick="volver()">Log In</button>
       <button class="btn btn-primary" onclick="info()">Info</button>
